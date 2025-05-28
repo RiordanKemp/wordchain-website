@@ -5,14 +5,27 @@
       <meta name="viewport" content="width=device-width,initial-scale=1" />
       <title>🦜 Polyglot - Piratical PyScript</title>
       <link rel="stylesheet" href="https://pyscript.net/releases/2025.5.1/core.css">
+      <link rel ="stylesheet" href = "screen.css">
       <script type="module" src="https://pyscript.net/releases/2025.5.1/core.js"></script>  
     </head>
-  <body>
+  <body class = "index">
 
-    <h1>WorD Drip </h1>
-    <p>Translate English into Pirate speak...</p>
+    <div class="bottomline"></div>
+    <div class="imgcontainer">
+      <p><img id = "caveroof" src="images/caveroof.png"></p>
+        <div class="overlay-text">WORD</div>
+        <div class = "overlay-r">r</div>
+        <div class = "overlay-i">i</div>
+        <div class = "overlay-p">p</div>
+    </div>
+
+
+
+    <p>Construct a perfect word flow..</p>
     <input type="text" id="english" placeholder="Type English here..." />
     <button py-click="translate_english">Translate</button>
+
+    <button py-click="test_function">Other</button>
 
     <div id="output"></div>
     <script type="py" src="./main.py" config="./pyscript.json"></script>

@@ -15,7 +15,7 @@ body{
 }
 
 .bottomline{
-    border-top: 3px solid #333333;
+    border-top: 9px solid #111111;
 }
 
 .mainborder{
@@ -36,7 +36,8 @@ body.krav{
 }
 
 body.index{
-    background-image: url(images/bghoney.png)
+    background:#fff;
+    font-family:Helvetica, sans-serif;
 }
 
 .details{
@@ -216,6 +217,66 @@ img{
     margin-top: 20px;
 }
 
+.img-container{
+    position: relative;
+    display: inline-block;
+}
+
+.img-container img{
+    align-self: center;
+    margin-bottom: 0px;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 10%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  color: #111111; 
+  padding: 10px 20px; 
+  font-size: 7em; 
+  font-weight: bold;
+  text-align: center;
+  -webkit-text-stroke: 4px #707070;
+}
+
+.overlay-r{
+      position: absolute;
+  top: 20%; 
+  left: 60%; 
+  transform: translate(-50%, -50%); 
+  color: #0964be; 
+  font-weight: bold;
+  text-align: left;
+  -webkit-text-stroke: 3.5px #d1d1d1;
+    font-size: 6em;
+}
+
+.overlay-i{
+      position: absolute;
+  top: 31%; 
+  left: 60%; 
+  transform: translate(-50%, -50%); 
+  color: #4693e0; 
+  font-weight: bold;
+  text-align: left;
+  -webkit-text-stroke: 3px #d1d1d1;
+    font-size: 5em;
+}
+
+.overlay-p{
+      position: absolute;
+  top: 39%; 
+  left: 61%; 
+  transform: translate(-50%, -50%); 
+  color: #67a9ec; 
+  font-weight: bold;
+  text-align: left;
+  -webkit-text-stroke: 2.5px #d1d1d1;
+    font-size: 4em;
+}
+
+
 p{
     margin:0;
     line-height: 1.4em;
@@ -224,6 +285,28 @@ p{
 
 h1{
     font-weight: bold;
+    color: #111111;
+    font-size: 5em;
+    margin-top: -15px;
+    
+}
+
+.dripr{
+    margin-left:175px;
+    margin-top: -90px;
+    font-size: .9em;
+}
+
+.dripi{
+    margin-left:175px;
+    margin-top: -80px;
+    font-size: .7em;
+}
+
+.dripp{
+    margin-left:190px;
+    margin-top: -65px;
+    font-size: .5em;
 }
 
 h2{
@@ -232,6 +315,8 @@ h2{
     text-align: center;
     font-weight: bolder;
 }
+
+
 
 a:visited.blog, a:link.blog {
     text-decoration: none;
@@ -250,4 +335,4 @@ figcaption {
     border: thin silver solid;
     border-bottom: none;
     margin-right: -100px;
-  }
+}
