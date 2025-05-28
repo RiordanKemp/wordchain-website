@@ -13,19 +13,19 @@
     <div class="bottomline"></div>
     <div class="imgcontainer">
       <p><img id = "caveroof" src="images/caveroof.png"></p>
-      
-            <div class="navigation"> 
-        <section class="play">
-            <h2>
-            <a class="nav" href="/gameplay">Click to Play</a>
-        </h2>
-        </section>
-        <section class="help">
-            <h2>
-            <a class="nav" href="/help">Click for Help</a>
-        </h2>
-         </section>
-    </div>
+        <div class="overlay-text">WORD</div>
+        <div class = "overlay-r">r</div>
+        <div class = "overlay-i">i</div>
+        <div class = "overlay-p">p</div>
+
+           <div class = "interactables"><p>Construct a perfect word flow.</p>
+    <input type="text" id="english" placeholder="Type English here..." />
+    <button py-click="translate_english">Translate</button>
+
+    <button py-click="test_function">Other</button></div>
+
+    <div id="output"></div>
+    <script type="py" src="./main.py" config="./pyscript.json"></script>
 
     </div>
 

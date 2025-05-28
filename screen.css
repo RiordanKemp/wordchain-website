@@ -276,6 +276,41 @@ img{
     font-size: 4em;
 }
 
+.interactables{
+  position: absolute;
+  top: 60%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  color: #477ee3; 
+  padding: 10px 20px; 
+  font-size: 2em; 
+  font-weight: bold;
+  text-align: center;
+}
+
+.navigation{
+  position: absolute;
+  top: 20%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  color: #d17979; 
+  padding: 10px 20px; 
+  font-size: 1em; 
+  font-weight: bold;
+  text-align: center;
+}
+
+
+
+.output{
+  position: absolute;
+  top: 90%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  text-align: center;
+  margin-top: -500px;
+}
+
 
 p{
     margin:0;
