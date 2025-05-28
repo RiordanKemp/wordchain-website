@@ -1,5 +1,6 @@
 import arrr
 from pyscript import document
+import random
 
 
 def translate_english(event):
@@ -7,3 +8,4 @@ def translate_english(event):
     english = input_text.value
     output_div = document.querySelector("#output")
     output_div.innerText = arrr.translate(english)
+    output_div.innerText = 3
