@@ -1,5 +1,7 @@
 from pyscript import document
 
+import streamlit as st
+
 import random
 import os
 import os.path
@@ -24,6 +26,8 @@ numb_dict = {}
 starting_words_set = set()
 already_used_words_set = set()
 valid_letters_dict = {}
+
+st.write("Hello world")
 
 
 def translate_english(event):
