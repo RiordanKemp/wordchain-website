@@ -311,6 +311,11 @@ img{
   font-size: 1em;
 }
 
+#filltext{
+    display: none;
+}
+
+
 
 p{
     margin:0;

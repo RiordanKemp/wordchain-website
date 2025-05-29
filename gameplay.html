@@ -19,14 +19,13 @@
         <div class = "overlay-p">p</div>
 
            <div class = "interactables"><p>Construct a perfect word flow.</p>
-    <input type="text" id="english" placeholder="Type English here..." />
-    <button py-click="translate_english">Translate</button>
+    <input type="text" id="filltext" placeholder="Type word here..." />
+    <button py-click="normal_button">Normal</button>
 
-    <button py-click="test_function">Other</button>
-        <button py-click="test_function2">HardmodeTogl</button>
+    <button py-click="hard_button">Hard</button>
   </div>
 
-    <div id="output"></div>
+    <div id="output"><p>What difficulty would you like to play?<br>Hard Mode requires child words to be +-1 in length relative to their parent.</p></div>
     <script type="py" src="./main.py" config="./pyscript.json"></script>
 
     </div>

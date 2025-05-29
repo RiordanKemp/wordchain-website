@@ -1,5 +1,4 @@
-from pyscript import window, document
-from pyweb import pydom
+from pyscript import document
 
 import random
 import os
@@ -9,7 +8,8 @@ import csv
 
 openingStr = """Welcome to NAME PENDING (word chain??)!"""
 difficultyDetails = "\nHard Mode requires child words to be +-1 in length relative to their parent."
-hardmodeEnabled = "\nYou've chosen to play on Hard Mode.  Hard Mode requires child words to be +-1 in length relative to their parent."
+hardmodeEnabled = "\nYou've chosen to play on Hard Mode."
+hardmodeDisabled = "You've chosen to play Normal Mode."
 exitMessage = "Thanks for playing! Exiting now..."
 reset_message = "Resetting the round now.."
 word_doesnt_exist_error = "This word does not exist."
@@ -27,8 +27,8 @@ valid_letters_dict = {}
 
 
 def translate_english(event):
-    input_text = document.querySelector("#english")
-    english = input_text.value
+    input_text = document.querySelector("#filltext")
+    filltext = input_text.value
     output_div = document.querySelector("#output")
     rand_int = random.randrange(2, 1001)
     output_div.innerText = str(rand_int) + openingStr
@@ -38,8 +38,13 @@ def test_function(event):
     output_div.innerText = difficultyDetails
     output_div.style.visible = True
 
-def test_function2(event):
+def normal_button(event):
+    output_div = document.querySelector("#output")
+    output_div.innerText = hardmodeDisabled
+
+
+def hard_button(event):
     output_div = document.querySelector("#output")
     output_div.innerText = hardmodeEnabled
-    output_div.style.visible = False
+    input_text = document.querySelector("#filltext")
     
