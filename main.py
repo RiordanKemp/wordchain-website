@@ -1,5 +1,6 @@
-import arrr
-from pyscript import document
+from pyscript import window, document
+from pyweb import pydom
+
 import random
 import os
 import os.path
@@ -29,12 +30,16 @@ def translate_english(event):
     input_text = document.querySelector("#english")
     english = input_text.value
     output_div = document.querySelector("#output")
-    output_div.innerText = arrr.translate(english)
     rand_int = random.randrange(2, 1001)
     output_div.innerText = str(rand_int) + openingStr
-    print(openingStr)
 
 def test_function(event):
-    input_text = document.querySelector("#english")
     output_div = document.querySelector("#output")
     output_div.innerText = difficultyDetails
+    output_div.style.visible = True
+
+def test_function2(event):
+    output_div = document.querySelector("#output")
+    output_div.innerText = hardmodeEnabled
+    output_div.style.visible = False
+    
