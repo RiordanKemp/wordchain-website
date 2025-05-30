@@ -1,25 +1,14 @@
-
-const readlineSync = require('readline-sync');
-const fs = require('fs');
-const path = require('path');
-const csv = require('csv-parse/sync');
-
-let openingStr = `Welcome to NAME PENDING (word chain??)!`;
-let difficultyDetails = "\nHard Mode requires child words to be +-1 in length relative to their parent.";
-let exitMessage = "Thanks for playing! Exiting now...";
-let reset_message = "Resetting the round now..";
-let word_doesnt_exist_error = "This word does not exist.";
-
-var difficultyOn = false;
-
+let difficultyOn = false;
 let directory_str = "dict_directory";
-
 let alphabet_dict = {};
 let words_dict = {};
 let numb_dict = {};
 let starting_words_set = new Set();
 let already_used_words_set = new Set();
 let valid_letters_dict = {};
+const fs = require('fs');
+const path = require('path');
+const csv = require('csv-parse/sync');
 
 //Dictionary CSV file: https://www.bragitoff.com/2016/03/english-dictionary-in-csv-format/
 
@@ -28,51 +17,110 @@ function normalMode(normalbutton){
     let diffdesc = document.getElementById("difficultydesc");
     let diffexpl = document.getElementById("difficultyexpl");
 
+    document.getElementById("difficultyreader").innerHTML = "Difficulty: <font color=green><b>NORMAL</b></font>";
     normalbutton.style.display = "none";
     hardbutton.style.display = "none";
     diffdesc.style.visibility = "hidden";
     diffexpl.innerHTML = "You chose to play on NORMAL difficulty.";
-    document.getElementById("difficultyreader").innerHTML = "Difficulty: <font color=green><b>NORMAL</b></font>";
-
+    starttimer();
+    startgame();
 }
 
-function hardMode(hardbutton){
+function hardMode(hardbutton, difficulty){
     let normalbutton = document.getElementById("normalButton");
     let diffdesc = document.getElementById("difficultydesc");
     let diffexpl = document.getElementById("difficultyexpl");
+
+    difficultyOn = difficulty;
+
     document.getElementById("difficultyreader").innerHTML = "Difficulty: <font color=red><b>HARD</b></font>";
     normalbutton.style.display = "none";
     hardbutton.style.display = "none";
     diffdesc.style.visibility = "hidden";
     diffexpl.innerHTML = "You chose to play on HARD difficulty.";
+    starttimer();
+    startgame();
+}
 
-    document.getElementById("difficultyreader").innerHTML = window.difficultyOn;
+function starttimer(){
+    let timetext = document.getElementById("timeleft");
 
-    difficultyOn = true;
+    timetext.innerHTML = "Time Left: 10:00";
+let timeLeft = 10 * 60; // 10 minutes in seconds
+
+const timer = setInterval(() => {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
+  string = "Time Left: " + (`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+  document.getElementById("timeleft").innerHTML = string;
+
+  timeLeft--;
+
+  if (timeLeft < 0) {
+    clearInterval(timer);
+      document.getElementById("timer").innerHTML = ("Time's up!");
+      resetgame()
+  }
+}, 1000);
+}
+
+
+
+function resetgame(){
+    
+}
+
+function random_word(){
 
 }
 
-function difficulty() {
-    let hardmodeBool = false;
-    let input_difficulty = readlineSync.question("\nDo you want to play Hard Mode? (Y = Yes, 0 = Details, Other = No)");
+function open_files_new(){
+    let readers_list = [];
+    let gameText = document.getElementById("gametext");
 
-    while (input_difficulty === "0") {
-        console.log(difficultyDetails);
-        input_difficulty = readlineSync.question("\nDo you want to play Hard Mode? (Y = Yes, 0 = Details, Other = No)");
-    }
+    let csvUrl = 'https://raw.githubusercontent.com/RiordanKemp/wordchain-website/main/dict_directory/A.csv';
+    csvUrlToArrayOfLines(csvUrl).then(lines => { // Array of raw CSV lines as strings
+            /*let csv_reader = csv.parse(lines, { 
+            delimiter: ',',
+            skip_empty_lines: true
+        });*/
+        const parsed = parseCSVLines(lines);
 
-    if (input_difficulty.toLowerCase() === "y") {
-        hardmodeBool = true;
-        console.log(hardmodeEnabled);
-    }
-
-    return hardmodeBool;
+        gameText.innerHTML = parsed;
+        readers_list.push(parsed); 
+    });
+    return readers_list;
 }
+
+function parseCSVLines(lines) {
+  const [headerLine, ...dataLines] = lines;
+  const headers = headerLine.split(',');
+
+  return dataLines.map(line => {
+    const values = line.split(',');
+    return headers.reduce((obj, header, i) => {
+      obj[header.trim()] = values[i].trim();
+      return obj;
+    }, {});
+  });
+}
+
+async function csvUrlToArrayOfLines(url) {
+  const response = await fetch(url);
+  const csvText = await response.text();
+  const lines = csvText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+  return lines;
+}
+
+
 
 function open_files() {
     let readers_list = [];
 
-    let files = fs.readdirSync(directory_str);
+    //this is a problem line
+    let files = fs.readdirSync(directoryPath);
+    
     for (let file of files) {
         let filename = file;
         let file_path = path.join(directory_str, filename);
@@ -85,6 +133,48 @@ function open_files() {
     }
 
     return readers_list;
+}
+
+function organize_dictionary_new(filereader_list) {
+
+
+    for (let reader of filereader_list) {
+
+        let gameText = document.getElementById("gametext");
+        gameText.innerHTML = "test";
+
+        let line_count = 0;
+        let letter_key;
+
+
+        
+        for (let line of reader) {
+            line_count += 1;
+
+
+            
+
+            if (line_count === 1) {
+
+
+
+                let line_str = line.join(' ');
+                letter_key = line_str[0];
+                //console.log("line str:", line_str, "line:", line);
+                //console.log("line_str[0]:", line_str[0]);
+                //console.log("letter key:", letter_key);
+            }
+
+            if (line_count % 2 === 1 && line_count !== 1) {
+                let line_str = line.join(' ');
+                let split_line = line_str.split(/\s+/);
+                let word_key = split_line[0];
+                word_key = word_key.replace(/[^a-zA-Z0-9]/g, '');
+                let word_def = split_line.slice(1).join(' ');
+                word_addition(word_key, word_def, letter_key);
+            }
+        }
+    }
 }
 
 function organize_dictionary(filereader_list) {
@@ -296,7 +386,27 @@ function child_word(parent_word, previous_word, difficultyOn) {
     return ["0", input_str];
 }
 
+function startgame(){
+    let gameText = document.getElementById("gametext");
+    gameText.innerHTML = "Loading dictionary...";
+    gameText.style.display = "block";
+
+    let readers_list = open_files_new();
+    //gameText.innerHTML = readers_list;
+
+    organize_dictionary_new(readers_list);
+
+    //gameText.innerHTML = "Loaded dict";
+
+
+    let starting_words_array = Array.from(starting_words_set);
+    let parent_word = starting_words_array[Math.floor(Math.random() * starting_words_array.length)];
+    //gameText.innerHTML = parent_word;
+
+}
+
 function main() {
+
     console.log(openingStr);
     let input_play = readlineSync.question("\nDo you want to play a game of NAME PENDING? (yes/no):");
     if (input_play.toLowerCase() === "no") {
@@ -396,3 +506,4 @@ function main() {
         }
     }
 }
+

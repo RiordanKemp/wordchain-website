@@ -323,6 +323,11 @@ img{
     margin-top: -20px;
 }
 
+#gametext{
+    margin-top: -10px;
+    display: none;
+}
+
 .mainheader{
     margin-top: 25px;
 }
